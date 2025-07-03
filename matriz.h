@@ -15,5 +15,9 @@ typedef struct Node {
 } Node;
 
 int verificaArquivo(const char *nome);
+void lerArquivo(Node *raiz, const char *nomeArquivo);
+Node* criarNo(const char *nome, int arquivo);
+
+void menu();
 
 #endif

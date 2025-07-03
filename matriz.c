@@ -25,5 +25,43 @@ void menu() {
     printf("7- ajuda\n");
     printf("8- sair\n");
     printf("--------------------------------------------------\n");
-    
+
+}
+void lerArquivo(Node *raiz, const char *nomeArquivo) {
+    FILE *fp = fopen(nomeArquivo, "r");
+    if (!fp) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    char linha[256];
+    while (fgets(linha, sizeof(linha), fp)) {
+        // Remove \n do final, se existir
+        linha[strcspn(linha, "\n")] = 0;
+        if (strlen(linha) > 0) {
+            adicionarCaminho(raiz, linha);
+        }
+    }
+
+    fclose(fp);
+}
+
+int verificaArquivo(const char *nome) {
+    // Procura o caractere '.' na string
+    if (strchr(nome, '.') != NULL) {
+        // Se encontrar, supõe que seja arquivo
+        return 1;
+    }
+    // Se não encontrar, é pasta
+    return 0;
+}
+
+Node* criarNo(const char *nome, int arquivo) {
+    Node *novo = (Node *)malloc(sizeof(Node));
+    strcpy(novo->nome, nome);
+    novo->arquivo = arquivo;
+    novo->pai = NULL;
+    novo->filho = NULL;
+    novo->irmao = NULL;
+    return novo;
 }
