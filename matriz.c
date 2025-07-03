@@ -65,3 +65,30 @@ Node* criarNo(const char *nome, int arquivo) {
     novo->irmao = NULL;
     return novo;
 }
+
+
+void inserirCaminho(Node *raiz, const char *caminho) {
+    char copia[200];
+    strcpy(copia, caminho);
+    char *token = strtok(copia, "/");
+    Node *atual = raiz;
+
+    while (token != NULL) {
+        Node *filho = atual->filho;
+        Node *anterior = NULL;
+        while (filho && strcmp(filho->nome, token) != 0) {
+            anterior = filho;
+            filho = filho->irmao;
+        }
+        if (!filho) {
+            filho = criarNo(token, verificaArquivo(token));
+            filho->pai = atual;
+            if (anterior)
+                anterior->irmao = filho;
+            else
+                atual->filho = filho;
+        }
+        atual = filho;
+        token = strtok(NULL, "/");
+    }
+}
