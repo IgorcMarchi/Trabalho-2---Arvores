@@ -2,56 +2,27 @@
 #include <stdlib.h>
 
 #include "matriz.h"
-#include "matriz.c"
 
 int main() {
 int opcao;
 
-   do{
-        menu();
-        printf("Digite a opcao: ");
-        scanf("%d", &opcao);
+     // Cria a raiz da árvore (exemplo: "ROOT")
+    Node *raiz = criarNo("ROOT", 0);
 
-        
-        switch (opcao) {
-            case 1:
-                break;
+    printf("Árvore inicial:\n");
 
-            case 2: {
-                break;
-            }
-            case 3:
-                break;
+    // Teste: lê o arquivo e monta a árvore
+    lerArquivo(raiz, "in.txt");
 
-            case 4:
+    printf("\nConteúdo da árvore após lerArquivo:\n");
+    listarConteudo(raiz, 0);
 
-                break;
-            case 5:
-                break;
+    printf("\nInserindo novo caminho: 'Meus Documentos/novapasta/novoarquivo.txt'\n");
+    inserirCaminho(raiz, "Meus Documentos/novapasta/novoarquivo.txt");
 
-            case 6:
+    listarConteudo(raiz, 0);
 
-                break;
-            case 7:
-
-                break;
-            
-            case 8:
-
-                break;
-            case 9:
-        
-                break;
-            case 10:
-                printf("Saindo.....\n");
-                break;
-
-            default:
-                printf("Opcao invalida.\n");
-                system("pause");
-                system("cls");
-                break;
-        }
-   }while(opcao != 10);
+    system("pause");
+   
    return 0;
 }

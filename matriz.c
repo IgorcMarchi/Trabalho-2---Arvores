@@ -2,16 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-int verificaArquivo(const char *nome) {
-    // Procura o caractere '.' na string
-    if (strchr(nome, '.') != NULL) {
-        // Se encontrar, supõe que seja arquivo
-        return 1;
-    }
-    // Se não encontrar, é pasta
-    return 0;
-}
 void menu() {
     printf("\n--------------------------------------------------\n");
     printf ("                     MENU: \n");
@@ -27,6 +17,7 @@ void menu() {
     printf("--------------------------------------------------\n");
 
 }
+
 void lerArquivo(Node *raiz, const char *nomeArquivo) {
     FILE *fp = fopen(nomeArquivo, "r");
     if (!fp) {
@@ -39,7 +30,7 @@ void lerArquivo(Node *raiz, const char *nomeArquivo) {
         // Remove \n do final, se existir
         linha[strcspn(linha, "\n")] = 0;
         if (strlen(linha) > 0) {
-            adicionarCaminho(raiz, linha);
+            inserirCaminho(raiz, linha);
         }
     }
 
@@ -91,4 +82,21 @@ void inserirCaminho(Node *raiz, const char *caminho) {
         atual = filho;
         token = strtok(NULL, "/");
     }
+}
+
+
+void listarConteudo(Node *no, int nivel) {
+    if (no == NULL) return;
+
+    // Indentação para mostrar a hierarquia
+    for (int i = 0; i < nivel; i++) {
+        printf("  ");
+    }
+    printf("%s%s\n", no->nome, no->arquivo ? "" : "/");
+
+    // Lista os filhos (recursivamente)
+    listarConteudo(no->filho, nivel + 1);
+
+    // Lista os irmãos (no mesmo nível)
+    listarConteudo(no->irmao, nivel);
 }

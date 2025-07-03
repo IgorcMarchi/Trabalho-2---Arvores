@@ -17,6 +17,8 @@ typedef struct Node {
 int verificaArquivo(const char *nome);
 void lerArquivo(Node *raiz, const char *nomeArquivo);
 Node* criarNo(const char *nome, int arquivo);
+void inserirCaminho(Node *raiz, const char *caminho);
+void listarConteudo(Node *no, int nivel);
 
 void menu();
 
