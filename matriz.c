@@ -12,3 +12,18 @@ int verificaArquivo(const char *nome) {
     // Se não encontrar, é pasta
     return 0;
 }
+void menu() {
+    printf("\n--------------------------------------------------\n");
+    printf ("                     MENU: \n");
+    printf("--------------------------------------------------\n");
+    printf("1- cd <nome>\n");
+    printf("2- Pesquisar <nome>\n");
+    printf("3- rm <nome>\n");
+    printf("4- listar\n");
+    printf("5- mkdir <nome>\n");
+    printf("6- Limpar\n");
+    printf("7- ajuda\n");
+    printf("8- sair\n");
+    printf("--------------------------------------------------\n");
+    
+}
