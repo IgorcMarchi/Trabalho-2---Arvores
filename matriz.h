@@ -20,6 +20,14 @@ Node* criarNo(const char *nome, int arquivo);
 void inserirCaminho(Node *raiz, const char *caminho);
 void listarConteudo(Node *no, int nivel);
 
+//Funçoes sobre terminal
+Node* comando_cd(Node *atual, const char *nome);
+void comando_mkdir(Node *atual, const char *nome);
+void comando_search(Node *raiz, const char *nome, const char *caminho);
+void comando_rm(Node *atual, const char *nome);
+void liberarArvore(Node *no);
+
+
 void menu();
 
 #endif

@@ -1,28 +1,47 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "matriz.h"
 
 int main() {
-int opcao;
-
-     // Cria a raiz da árvore (exemplo: "ROOT")
     Node *raiz = criarNo("ROOT", 0);
+    Node *pastaAtual = raiz;
 
-    printf("Árvore inicial:\n");
-
-    // Teste: lê o arquivo e monta a árvore
     lerArquivo(raiz, "in.txt");
 
-    printf("\nConteúdo da árvore após lerArquivo:\n");
-    listarConteudo(raiz, 0);
+    char comando[256];
 
-    printf("\nInserindo novo caminho: 'Meus Documentos/novapasta/novoarquivo.txt'\n");
-    inserirCaminho(raiz, "Meus Documentos/novapasta/novoarquivo.txt");
+    while (1) {
+        printf("\n[%s]$ ", pastaAtual->nome); // como um terminal
+        fgets(comando, sizeof(comando), stdin);
 
-    listarConteudo(raiz, 0);
+        // Remove quebra de linha
+        comando[strcspn(comando, "\n")] = 0;
 
-    system("pause");
-   
-   return 0;
+        // Divide comando em palavra-chave e argumento
+        char *cmd = strtok(comando, " ");
+        char *arg = strtok(NULL, "");
+
+        if (!cmd) continue;
+
+        if (strcmp(cmd, "cd") == 0) {
+            pastaAtual = comando_cd(pastaAtual, arg);
+        } else if (strcmp(cmd, "mkdir") == 0) {
+            comando_mkdir(pastaAtual, arg);
+        } else if (strcmp(cmd, "list") == 0) {
+            listarConteudo(pastaAtual, 0);
+        } else if (strcmp(cmd, "search") == 0) {
+            comando_search(raiz, arg, "");
+        } else if (strcmp(cmd, "rm") == 0) {
+            comando_rm(pastaAtual, arg);
+        } else if (strcmp(cmd, "help") == 0) {
+            menu(); // ou comando_help()
+        } else if (strcmp(cmd, "clear") == 0) {
+            system("cls");
+        } else if (strcmp(cmd, "exit") == 0) {
+            liberarArvore(raiz);
+            break;
+        } else {
+            printf("Comando inválido. Digite 'help' para ver os comandos disponíveis.\n");
+        }
+    }
+
+    return 0;
 }
