@@ -36,7 +36,7 @@ int main() {
         } else if (strcmp(cmd, "rm") == 0) {
             comando_rm(pastaAtual, arg);
         } else if (strcmp(cmd, "help") == 0) {
-            menu(); // ou comando_help()
+            comando_help();
         } else if (strcmp(cmd, "clear") == 0) {
             comando_clear();
         } else if (strcmp(cmd, "cfif") == 0) {
@@ -45,7 +45,7 @@ int main() {
             liberarArvore(raiz);
             break;
         } else {
-            printf("Comando inválido. Digite 'help' para ver os comandos disponíveis.\n");
+            printf("Comando invalido. Digite 'help' para ver os comandos disponiveis.\n");
         }
     }
 

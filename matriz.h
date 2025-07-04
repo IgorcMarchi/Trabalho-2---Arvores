@@ -34,7 +34,4 @@ Node* encontrarPasta(Node *raiz, const char *nome);
 int contarArquivos(Node *pasta);
 
 
-
-void menu();
-
 #endif

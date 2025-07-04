@@ -2,22 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void menu() {
-    printf("\n--------------------------------------------------\n");
-    printf ("                     MENU: \n");
-    printf("--------------------------------------------------\n");
-    printf("1- cd <nome>\n");
-    printf("2- Pesquisar <nome>\n");
-    printf("3- rm <nome>\n");
-    printf("4- listar\n");
-    printf("5- mkdir <nome>\n");
-    printf("6- Limpar\n");
-    printf("7- ajuda\n");
-    printf("8- sair\n");
-    printf("--------------------------------------------------\n");
-
-}
-
 void lerArquivo(Node *raiz, const char *nomeArquivo) {
     FILE *fp = fopen(nomeArquivo, "r");
     if (!fp) {
@@ -120,7 +104,7 @@ Node* comando_cd(Node *atual, const char *nome) {
     }
 
     // Se não encontrou
-    printf("cd: %s: Diretório não encontrado.\n", nome);
+    printf("cd: %s: Diretorio nao encontrado.\n", nome);
     return atual; // permanece na pasta atual
 }
 
@@ -134,7 +118,7 @@ void comando_mkdir(Node *atual, const char *nome) {
     Node *filho = atual->filho;
     while (filho != NULL) {
         if (strcmp(filho->nome, nome) == 0 && filho->arquivo == 0) {
-            printf("mkdir: diretório '%s' já existe.\n", nome);
+            printf("mkdir: diretorio '%s' ja existe.\n", nome);
             return;
         }
         filho = filho->irmao;
@@ -155,7 +139,7 @@ void comando_mkdir(Node *atual, const char *nome) {
         ultimo->irmao = novo;
     }
 
-    printf("Diretório '%s' criado com sucesso.\n", nome);
+    printf("Diretorio '%s' criado com sucesso.\n", nome);
 }
 
 
@@ -210,11 +194,11 @@ void comando_rm(Node *atual, const char *nome) {
         filho = filho->irmao;
     }
 
-    printf("rm: %s: Arquivo ou diretório não encontrado.\n", nome);
+    printf("rm: %s: Arquivo ou diretorio nao encontrado.\n", nome);
 }
 
 void comando_help() {
-    printf("\nComandos disponíveis:\n");
+    printf("\nComandos disponiveis:\n");
     printf("1. cd <nome>      - Entra na pasta <nome>\n");
     printf("2. search <nome>  - Busca por arquivo ou pasta chamada <nome>\n");
     printf("3. rm <nome>      - Remove um arquivo ou diretorio\n");
