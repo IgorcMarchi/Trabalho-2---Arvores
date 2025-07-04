@@ -1,5 +1,8 @@
 #include "matriz.h"
 
+//Quantidade de arquivos
+//Quantidades de arquivos dentros de uma pasta
+
 int main() {
     Node *raiz = criarNo("ROOT", 0);
     Node *pastaAtual = raiz;
@@ -9,6 +12,7 @@ int main() {
     char comando[256];
 
     while (1) {
+        
         printf("\n[%s]$ ", pastaAtual->nome); // como um terminal
         fgets(comando, sizeof(comando), stdin);
 
@@ -34,7 +38,9 @@ int main() {
         } else if (strcmp(cmd, "help") == 0) {
             menu(); // ou comando_help()
         } else if (strcmp(cmd, "clear") == 0) {
-            system("cls");
+            comando_clear();
+        } else if (strcmp(cmd, "cfif") == 0) {
+            comando_contar(raiz, arg);
         } else if (strcmp(cmd, "exit") == 0) {
             liberarArvore(raiz);
             break;

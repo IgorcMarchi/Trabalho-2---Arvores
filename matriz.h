@@ -26,6 +26,13 @@ void comando_mkdir(Node *atual, const char *nome);
 void comando_search(Node *raiz, const char *nome, const char *caminho);
 void comando_rm(Node *atual, const char *nome);
 void liberarArvore(Node *no);
+void comando_clear();
+
+//Extra
+void comando_contar(Node *raiz, const char *nomePasta);
+Node* encontrarPasta(Node *raiz, const char *nome);
+int contarArquivos(Node *pasta);
+
 
 
 void menu();

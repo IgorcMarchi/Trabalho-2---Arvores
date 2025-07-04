@@ -1,6 +1,6 @@
-Arquivos e Programas/Firefox
-Arquivos e Programas/Chrome
-Arquivos e Programas/Opera
+Arquivos e Programas/Firefox.exe
+Arquivos e Programas/Chrome.exe
+Arquivos e Programas/Opera.exe
 Meus Documentos/apresentacao.ppt
 Meus Documentos/relatorio.doc
 Meus Documentos/fontes

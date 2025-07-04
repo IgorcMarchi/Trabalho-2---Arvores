@@ -217,20 +217,17 @@ void comando_help() {
     printf("\nComandos disponíveis:\n");
     printf("1. cd <nome>      - Entra na pasta <nome>\n");
     printf("2. search <nome>  - Busca por arquivo ou pasta chamada <nome>\n");
-    printf("3. rm <nome>      - Remove um arquivo ou diretório\n");
-    printf("4. list           - Lista o conteúdo da pasta atual\n");
+    printf("3. rm <nome>      - Remove um arquivo ou diretorio\n");
+    printf("4. list           - Lista o conteudo da pasta atual\n");
     printf("5. mkdir <nome>   - Cria uma nova pasta chamada <nome>\n");
     printf("6. clear          - Limpa a tela\n");
     printf("7. help           - Mostra esta mensagem de ajuda\n");
-    printf("8. exit           - Encerra o programa\n");
+    printf("8. cfif           - Conta quantos arquivos tem dentro da pasta chamada <nome>\n");
+    printf("9. exit           - Encerra o programa\n");
 }
 
 void comando_clear() {
-    #ifdef _WIN32
         system("cls");   // Comando para limpar tela no Windows
-    #else
-        system("clear"); // Comando para limpar tela no Linux/Mac
-    #endif
 }
 
 
@@ -242,4 +239,50 @@ void liberarArvore(Node *no) {
     liberarArvore(no->irmao);
     free(no);
 }
+
+int contarArquivos(Node *pasta) {
+    if (!pasta) return 0;
+
+    int count = 0;
+    Node *filho = pasta->filho;
+    while (filho) {
+        if (filho->arquivo == 1) {
+            count++;
+        } else {
+            count += contarArquivos(filho);
+        }
+        filho = filho->irmao;
+    }
+    return count;
+}
+
+Node* encontrarPasta(Node *raiz, const char *nome) {
+    if (!raiz) return NULL;
+
+    if (raiz->arquivo == 0 && strcmp(raiz->nome, nome) == 0)
+        return raiz;
+
+    Node *encontrado = encontrarPasta(raiz->filho, nome);
+    if (encontrado) return encontrado;
+
+    return encontrarPasta(raiz->irmao, nome);
+}
+
+void comando_contar(Node *raiz, const char *nomePasta) {
+    if (!nomePasta) {
+        printf("Uso correto: contar <nome_da_pasta>\n");
+        return;
+    }
+
+    Node *pasta = encontrarPasta(raiz, nomePasta);
+    if (!pasta) {
+        printf("Pasta '%s' nao encontrada.\n", nomePasta);
+        return;
+    }
+
+    int total = contarArquivos(pasta);
+    printf("A pasta '%s' contem %d arquivo(s).\n", nomePasta, total);
+}
+
+
 
